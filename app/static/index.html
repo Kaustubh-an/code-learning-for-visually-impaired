@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An accessible, voice-assisted Python learning environment.">
+    <title>Accessible Code Learning Platform</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#editor">Skip to code editor</a>
+
+    <header class="topbar">
+        <div>
+            <h1>Code Learning Platform</h1>
+            <p>Accessible Python workspace</p>
+        </div>
+        <div id="connectionStatus" class="status" role="status" aria-live="polite">
+            Checking Ollama connection...
+        </div>
+    </header>
+
+    <main>
+        <section class="toolbar" aria-label="Code actions">
+            <button id="runButton" type="button">Run Python (Ctrl + Enter)</button>
+            <button id="readButton" type="button">Read code aloud</button>
+            <button id="micButton" type="button">Start voice command</button>
+            <button id="stopButton" type="button">Stop speaking</button>
+        </section>
+
+        <section class="editor-section" aria-labelledby="editorHeading">
+            <h2 id="editorHeading">Python code editor</h2>
+            <p id="editorHelp" class="help">
+                Use the editor with your keyboard or screen reader. Press F1 inside the editor
+                to open Monaco's command palette. Ctrl + M toggles whether Tab moves focus
+                out of the editor.
+            </p>
+            <div id="editor" aria-label="Python code editor"></div>
+        </section>
+
+        <section class="output-section" aria-labelledby="outputHeading">
+            <h2 id="outputHeading">Program output</h2>
+            <pre id="output" tabindex="0" aria-live="polite">Your program output will appear here.</pre>
+        </section>
+
+        <section class="tutor-section" aria-labelledby="tutorHeading">
+            <h2 id="tutorHeading">AI tutor</h2>
+            <label for="questionInput">Ask a question about your code</label>
+            <textarea id="questionInput" rows="3"
+                placeholder="For example: Explain line 3 in simple terms."></textarea>
+            <div class="toolbar">
+                <button id="askButton" type="button">Ask AI tutor</button>
+            </div>
+            <div id="tutorAnswer" class="answer" tabindex="0" role="region"
+                 aria-label="AI tutor answer" aria-live="polite">
+                The tutor's answer will appear here.
+            </div>
+        </section>
+
+        <section class="voice-help" aria-labelledby="voiceHeading">
+            <h2 id="voiceHeading">Voice commands</h2>
+            <p>Try saying one of these commands after selecting Start voice command:</p>
+            <ul>
+                <li>Read code</li>
+                <li>Explain line 5</li>
+                <li>Read line 5</li>
+                <li>Go to line 5</li>
+                <li>Run code</li>
+                <li>Stop speaking</li>
+                <li>Or ask a general question about the code</li>
+            </ul>
+            <p id="voiceStatus" role="status" aria-live="polite">Voice input is not active.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>MVP demonstration. Do not use this prototype to run code from untrusted users.</p>
+    </footer>
+
+    <script>
+        // Monaco is loaded from a CDN, so an internet connection is required for the editor.
+        var require = { paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs" } };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/loader.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
